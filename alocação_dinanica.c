@@ -5,7 +5,7 @@ int main(void)
 {	
 	int *v, *mem; 
 	int n, i;
-	char M, E, S, I, EXIT; // M - Modificado, E - Exclusivo, S - Compartilahdo, I - Inválido, EXIT - SAIR
+	char Status_Cache, EXIT; // M - Modificado, E - Exclusivo, S - Compartilahdo, I - Inválido, EXIT - SAIR
 	printf("Quantas cache?\n");
 	scanf ("%d", &n);
 	v = malloc (n * sizeof (int));
