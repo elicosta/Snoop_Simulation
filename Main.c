@@ -3,18 +3,18 @@
 
 int main(void)
 {	
-	int *v, *mem; 
+	int *cache, *memoria; 
 	int n, i;
-	char M, E, S, I; // M - Modificado, E - Exclusivo, S - Compartilahdo, I - Inv·lido
+	char M, E, S, I; // M - Modificado, E - Exclusivo, S - Compartilahdo, I - Inv√°lido
 	printf("Quantas cache?\n");
 	scanf ("%d", &n);
-	v = malloc (n * sizeof (int));
-	mem = malloc (n * sizeof (int));
+	cache = malloc (n * sizeof (int));
+	memoria = malloc (n * sizeof (int));
 	for (i = 0; i < n; ++i){
-		scanf("%d", &v[i]);
+		scanf("%d", &cache[i]);
 	}
 	for (i = 0; i < n; ++i){
-		printf("%d ", &v[i]);
+		printf("%d ", &memoria[i]);
 	}
 	
 	free (v);
