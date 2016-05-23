@@ -14,7 +14,7 @@ int main(void)
 		scanf("%d", &cache[i]);
 	}
 	for (i = 0; i < n; ++i){
-		printf("%d ", &memoria[i]);
+		printf("%d ", &cache[i]);
 	}
 	
 	free (v);
