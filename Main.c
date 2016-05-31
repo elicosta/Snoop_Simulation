@@ -1,10 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void read(){
+void read(int a, int n, int endereco, int cache[], int memoria[]){
+	int i;
+	for (i = 0; i < n; ++i){
+		if(endereco == &memoria[i]){
+			cache[a] = memoria[i];
+			system("cls");
+			printf("endereco: %d\n", endereco);
+			printf("cache: %d\n", a);
+			printf("enderecomemory: %d\n", &memoria[i]);
+			printf("enderecache: %d\n", &cache[i]);
+			}
+		//else{
+		//	printf("invalido");}	
+	}
+		
 }
+	
 
 void write(){
+}
+
+void listingCache(int i, int n, int cache[]){
+	for (i = 0; i < n; ++i){
+		printf("Cache %d: %d\n", i, &cache[i]);
+	}
+}
+
+void listingMemory(int i, int n, int memoria[]){
+	for (i = 0; i < n; ++i){
+	printf("Memória %d: %d\n", i, &memoria[i]);
+	}
 }
 
 int main(void)
@@ -39,17 +66,17 @@ int main(void)
 		printf("1 - LEITURA\n2 - ESCRITA\n3 - LISTAR ENDEREÇOS DA CACHE\n4 - LISTAR ENDEREÇOS DA MEMÓRIA\n0 - SAIR\n");
 		scanf("%d", &menu);
 		if(menu == 1){
-			
+			printf("Qual cache será usado pelo endereço de memória?\n");
+			for (i = 0; i < n; ++i){
+			printf("cache %d\n", i);
+			}
+			scanf("%d", &a);
 			printf("Qual endereço de memória será lido?\n");
 			for (i = 0; i < n; ++i){
 			printf("Memória %d: %d\n", i, &memoria[i]);
 			}
-			scanf("%d", endereco);
-			printf("Qual cache será usado pelo endereço de memória?\n");
-			for (i = 0; i < n; ++i){
-			scanf("cache%d", i);
-			}
-			scanf("%d", i);
+			scanf("%d", &endereco);
+			read(a, n, endereco, cache, memoria);	
 		}
 		
 		if(menu == 2){
@@ -58,14 +85,10 @@ int main(void)
 		}
 		}
 		if(menu == 3){
-			for (i = 0; i < n; ++i){
-			printf("Cache %d: %d\n", i, &cache[i]);
-			}
+			listingCache(i,n, cache);
 		}
 		if(menu == 4){
-			for (i = 0; i < n; ++i){
-			printf("Memória %d: %d\n", i, &memoria[i]);
-			}
+			listingMemory(i, n, memoria);
 		}
 	}
 
