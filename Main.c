@@ -13,51 +13,56 @@ void view(int i, int n, int cache[], int memoria[], char status[]){
 	printf("#############################################\n");	
 }
 
-void read(int i, int a, int n, int endereco, int cache[], int memoria[], char status[]){
+void verify(int i, int a, int n, int cache[], int memoria[], char status[]){
 	for (i = 0; i < n; ++i){
-		if(endereco == (int)&memoria[i]){
-			cache[a] = memoria[i];
-			
-			
-			//view(i, n, cache, memoria, status);//Exibe toda atividade após a leitura na memória
-			
-			//system("cls");
-			printf("endereco: %d\n", endereco);
-			printf("cache: %d\n", a);
-			printf("enderecomemory: %d\n", &memoria[i]);
-			printf("enderecache: %d\n", &cache[i]);
-			printf("cache: %d\n", cache[i]);
-			printf("memory: %d\n", memoria[i]);
-		}
-		if(cache[i] == cache[a] && a != i){
-			status[a] = 'S';
-			status[i]= 'S';			 
-		}
 		if(cache[i] != cache[a] && a!= i){
 			status[a] = 'E';
 			status[i]= 'E';	
 		}
+		if(cache[i] == cache[a] && a != i && a != 0){
+			status[a] = 'S';
+			status[i]= 'S';			 
+		}
 		//else{
-		//printf("invalido");}
-		
+		//	status[a] = 'I';
+		//}
 	}
+}
+
+void read(int i, int a, int n, int endereco, int cache[], int memoria[], char status[]){
+	for (i = 0; i < n; ++i){		
+		if(endereco == (int)&memoria[i]){
+			cache[a] = memoria[i];
+		}		
+	}
+	verify(i, a, n, cache, memoria, status);
 	view(i, n, cache, memoria, status);	
 }
 	
 
-void write(){
-}
-
-void listingCache(int i, int n, int cache[]){
-	for (i = 0; i < n; ++i){
-		printf("Cache %d: %d\n", i, &cache[i]);
+void write(int i, int a, int n, int endereco, int cache[], int memoria[], char status[]){
+	printf("qual valor deseja armazenar na cache %d", a);
+	scanf("%d", cache[a]);
+	status[a] = 'M';
+	printf("Deseja armazenar linha da cache na memória selecionada?");
+	printf("0 - SIM        1  - NÃO");
+	scanf("%d", &i);
+	if(i == 0){
+		for (i = 0; i < n; ++i){
+			if(endereco == (int)&memoria[i]){
+				memoria[i] = cache[a];				
+			}
+			if(cache[i] == cache[a] && a != i){
+			status[a] = 'S';
+			status[i]= 'S';			 
+			}
+			if(cache[i] != cache[a] && a!= i){
+				status[a] = 'E';
+				status[i]= 'E';	
+			}
+		}
 	}
-}
-
-void listingMemory(int i, int n, int memoria[]){
-	for (i = 0; i < n; ++i){
-	printf("Memória %d: %d\n", i, &memoria[i]);
-	}
+	
 }
 
 int main(void)
@@ -108,15 +113,20 @@ int main(void)
 		}
 		
 		if(menu == 2){
+			printf("Qual cache será usada para escrita?\n");
 			for (i = 0; i < n; ++i){
-			scanf("%d", cache[i]);
-		}
+			printf("cache %d\n", i);
+			}
+			scanf("%d", &a); //Váriavel a terá o número de qual cache escolhida
+			printf("Qual endereço de memória será armazenizado a linha de cache?\n");
+			for (i = 0; i < n; ++i){
+			printf("Memória %d: %d\n", i, &memoria[i]);
+			}
+			scanf("%d", &endereco);
 		}
 		if(menu == 3){
-			listingCache(i,n, cache);
 		}
 		if(menu == 4){
-			listingMemory(i, n, memoria);
 		}
 	}
 
