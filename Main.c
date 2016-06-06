@@ -8,7 +8,7 @@ void view(int i, int n, int cache[], int memoria[], char status[]){
 	system("cls");
 	printf("#############################################\n");
 	for(i = 0; i < 10; ++i){		
-		printf("Memória %d: %d ", i, memoria[i]);
+		printf("MemÃ³ria %d: %d ", i, memoria[i]);
 		if(i == 4){
 				printf("\n");	
 			}
@@ -29,7 +29,7 @@ void verify(int i, int a, int b, int n, int endereco[], int cache[], int memoria
 				status[a] = 'S';
 				status[i] = 'S';
 			}
-			if(endereco[i] == endereco[a] && cache[a] != memoria[b]){
+			if(endereco[i] == endereco[a] && cache[a] != memoria[b] && status[a] == 'S'){
 				status[a] = 'M';
 			}
 			//if(endereco[i] != endereco[a] && cache[a] != memoria[b] ){
@@ -63,9 +63,9 @@ int main(void)
 	setlocale(LC_ALL, "Portuguese"); //Uso de caracteres especiais
 	int a, b, n, i, menu, memoria[10];
 	int *cache, *endereco;
-	char *status; // M - Modificado, E - Exclusivo, S - Compartilhado, I - Inválido
+	char *status; // M - Modificado, E - Exclusivo, S - Compartilhado, I - InvÃ¡lido
 	
-	//Quantos cache possuirá o sistema, de acordo com o usuário final 
+	//Quantos cache possuirÃ¡ o sistema, de acordo com o usuÃ¡rio final 
 	printf("#############################################\n");
 	printf("#           Cache Memory Snooping           #\n");
 	printf("#############################################\n");
@@ -73,7 +73,7 @@ int main(void)
 	scanf ("%d", &n);
 	menu = 100;
 	
-	//Criaçao da Memória, Cache e Status da Cache em vetores de alocação dinâmica
+	//CriaÃ§ao da MemÃ³ria, Cache e Status da Cache em vetores de alocaÃ§Ã£o dinÃ¢mica
 	for (i = 0; i < 10; ++i){
 		memoria[i] = rand() % 100;
 	}
@@ -89,23 +89,23 @@ int main(void)
 	
 	//menu principal do sistema
 	while(menu != 0){
-		printf("Quais opções você deseja?\n");
-		printf("1 - LEITURA\n2 - ESCRITA\n3 - LISTAR ENDEREÇOS DA CACHE\n4 - LISTAR ENDEREÇOS DA MEMÓRIA\n0 - SAIR\n");
+		printf("Quais opÃ§Ãµes vocÃª deseja?\n");
+		printf("1 - LEITURA\n2 - ESCRITA\n3 - LISTAR ENDEREÃ‡OS DA CACHE\n4 - LISTAR ENDEREÃ‡OS DA MEMÃ“RIA\n0 - SAIR\n");
 		scanf("%d", &menu);
-		//Leitura da memória para a cache que o usuário irá determinar
+		//Leitura da memÃ³ria para a cache que o usuÃ¡rio irÃ¡ determinar
 		if(menu == 1){
 			system("cls");
-			printf("Qual cache será usado pelo endereço de memória?\n");
+			printf("Qual cache serÃ¡ usado pelo endereÃ§o de memÃ³ria?\n");
 			for (i = 0; i < n; ++i){
 			printf("cache %d\n", i);
 			}
-			scanf("%d", &a); //Váriavel a terá o número de qual cache escolhida
-			printf("Qual memória será lida?\n");
+			scanf("%d", &a); //VÃ¡riavel a terÃ¡ o nÃºmero de qual cache escolhida
+			printf("Qual memÃ³ria serÃ¡ lida?\n");
 			for (i = 0; i < 10; ++i){
-			printf("Memória %d: %d\n", i, &memoria[i]);
+			printf("MemÃ³ria %d: %d\n", i, &memoria[i]);
 			}
-			scanf("%d", &b); //Variavel endereço terá o número de memória escolhida
-			endereco[a] = (uintptr_t)&memoria[b]; // endereco da memória ficará em um vetor endereços para ser realizado a verificação de status
+			scanf("%d", &b); //Variavel endereÃ§o terÃ¡ o nÃºmero de memÃ³ria escolhida
+			endereco[a] = (uintptr_t)&memoria[b]; // endereco da memÃ³ria ficarÃ¡ em um vetor endereÃ§os para ser realizado a verificaÃ§Ã£o de status
 			read(i, a, b, n, endereco, cache, memoria, status);	
 		}
 		
