@@ -54,8 +54,16 @@ void read(int i, int a, int b, int n, int endereco[], int cache[], int memoria[]
 }
 	
 
-void write(int i, int a, int n, int endereco[], int cache[], int memoria[], char status[]){
-		
+void write(int i, int a, int b, int n, int endereco[], int cache[], int memoria[], char status[]){
+	if(endereco[a] == (uintptr_t)&memoria[b]){
+		memoria[b] = cache[a];
+		//if(status == 'M'){
+		//	status[a] = 'S';
+		//}
+	}
+	else{
+		printf("ERRO DE ESCRITA: Cache selecionada não foi alocada para memória desejada na opção de leitura.")
+	}
 }
 
 int main(void)
@@ -111,6 +119,17 @@ int main(void)
 		
 		if(menu == 2){
 			system("cls");
+			printf("Qual cache terá seu valor retornada para a memória?\n");
+			for (i = 0; i < n; ++i){
+			printf("cache %d\n", i);
+			}
+			scanf("%d", &a);
+			printf("Qual memória receberá o valor da cache escolhida?\n");
+			for (i = 0; i < 10; ++i){
+			printf("Memória %d: %d\n", i, &memoria[i]);
+			}
+			scanf("%d", &b);
+			write(i, a, b, n, endereco, cache, memoria, status);
 		}
 		if(menu == 3){
 			system("cls");
